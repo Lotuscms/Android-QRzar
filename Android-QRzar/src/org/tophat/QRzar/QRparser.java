@@ -8,7 +8,7 @@ package org.tophat.QRzar;
  * _________________________________________________
  * |   0   |   1   |   2   |   3   |   4   |   5   |
  * |________________________________________________
- * | Color | <------- Game ------> | <--Player---> |
+ * | Color | <------- Player T-Shirt ID		  ---> |
  * |________________________________________________
  * 
  * 
@@ -23,11 +23,6 @@ public class QRparser
      * So that the team only needs to be extracted once in order to be used, it is saved in this variable after one
      */
     private String team;
-    
-    /**
-     * The game Id is saved in here after one in order to ensure that it does not have to be recalculated.
-     */
-    private Integer gameId;
     
     /**
      * This playerId
@@ -54,6 +49,12 @@ public class QRparser
         	this.valid = true;
         }
     }
+    
+    @Override
+    public String toString()
+    {
+    	return data;
+    }
 
     /**
      * Gets the team from the given QRcode.
@@ -61,46 +62,7 @@ public class QRparser
      */
     public String getTeam()
     {
-    	if( team == null )
-    	{
-	        if(data.charAt(0) == 'R')
-	        {
-	            team = "red";
-	        }
-	        else if(data.charAt(0) == 'B')
-	        {
-	            team = "blue";
-	        }
-	        else if(data.charAt(0) == 'G')
-	        {
-	            team = "green";
-	        }
-	        else if(data.charAt(0) == 'Y')
-	        {
-	            team = "yellow";
-	        }
-    	}
-        
-		return team;
-    }
-
-    /**
-     * Returns the Game ID from the given QRcode.
-     * @return
-     */
-    public int getGameId()
-    {
-    	if( gameId == null )
-    	{
-	        gameId = 0;
-	        gameId += (int)data.charAt(1);
-	        gameId = gameId << (int) Math.pow( (double) 2, (double)8);
-	        gameId += (int)data.charAt(2);
-	        gameId = gameId << (int) Math.pow( (double)2, (double)8);
-	        gameId += (int)data.charAt(3);
-    	}
-    	
-    	return (int)gameId;
+    	return ((Character)this.data.charAt(0)).toString();
     }
 
     /**
@@ -112,6 +74,12 @@ public class QRparser
     	if (playerId == null )
     	{
 	        int res = 0;
+	        res += (int)data.charAt(1);
+	        res = res << (int)Math.pow((double)2, (double)8);
+	        res += (int)data.charAt(2);
+	        res = res << (int)Math.pow((double)2, (double)8);
+	        res += (int)data.charAt(3);
+	        res = res << (int)Math.pow((double)2, (double)8);
 	        res += (int)data.charAt(4);
 	        res = res << (int)Math.pow((double)2, (double)8);
 	        res += (int)data.charAt(5);

@@ -92,24 +92,12 @@ public class MainScreenActivity extends Activity{
     		  if( qr.isValid() )
     		  {
 	    		  showNotification("Team " + qr.getTeam() );
-	    		  showNotification("Game ID " + qr.getGameId() );
 	    		  showNotification("Player ID " + qr.getPlayerId() );
 	    		  
 	    		  playerDetails = qr;
 	    		  
-				  Intent myIntent = new Intent(c, CountDown.class);
+				  Intent myIntent = new Intent(c, GameJoin.class);
 				  startActivityForResult(myIntent, 8);
-				  
-				  //TCPStream tcp = new TCPStream();
-	    	        
-	    		  try
-	    		  {
-	    			  //tcp.connect();
-	    		  } 
-	    		  catch ( Exception e )
-	    		  {
-	    			  e.printStackTrace();
-	    		  }
     		  }
     		  else
     		  {

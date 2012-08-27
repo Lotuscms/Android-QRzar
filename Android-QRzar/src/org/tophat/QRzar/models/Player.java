@@ -13,6 +13,11 @@ public class Player extends org.tophat.android.mapping.Player {
 	private String team;
 	private String qrcode;
 	
+	public Player()
+	{
+		super();
+	}
+	
 	public Player(Map<String, Object> data)
 	{
 		super(data);
